@@ -4,7 +4,7 @@ from utils import generate_key
 class BaseConfig:
     key = generate_key.generate_key()
     SECRET_KEY = key
-    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql123@localhost/hmwx'
+    SQLALCHEMY_DATABASE_URI = 'mysql://root:mysql123@localhost/hkwx'
 
 
 config_dict = {
