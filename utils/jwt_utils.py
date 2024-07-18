@@ -19,7 +19,7 @@ def generate_jwt(payload, expire, secret_key=None):
         secret_key = current_app.config['SECRET_KEY']
 
     token = jwt.encode(_payload, secret_key, algorithm="HS256")
-    return token.encode()
+    return token
 
 
 # 校验
