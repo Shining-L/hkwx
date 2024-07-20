@@ -6,7 +6,7 @@ from sqlalchemy import text
 
 
 class BookShelf(db.Model):
-    ''' 书架 '''
+    """ 书架 """
     __tablename__ = 'book_shelf'
     id = db.Column(db.Integer, primary_key=True)
     book_id = db.Column(db.Integer, index=True)  # 书籍ID
@@ -19,7 +19,9 @@ class BookShelf(db.Model):
 
 
 class ReadRate(db.Model):
-    ''' 阅读进度 '''
+    """
+    阅读进度
+    """
     __tablename__ = 'read_rate'
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer)
@@ -31,7 +33,9 @@ class ReadRate(db.Model):
 
 
 class Book(db.Model):
-    ''' 书籍基本信息 '''
+    """
+    书籍基本信息
+    """
     __tablename__ = 'book'
     book_id = db.Column(db.Integer, primary_key=True)  # 书籍ID
     channel_book_id = db.Column(db.String(20), unique=True)  # 渠道书籍id 渠道名:书籍id
@@ -87,7 +91,8 @@ class BookCategoryRelation(db.Model):
 
 
 class BookBigCategory(db.Model):
-    ''' 书籍一级分类信息 '''
+    """ 书籍一级分类信息 """
+
     __tablename__ = 'book_big_category'
 
     cate_id = db.Column(db.Integer, primary_key=True)  # 分类ID
@@ -103,7 +108,7 @@ class BookBigCategory(db.Model):
 
 
 class BookCategory(db.Model):
-    ''' 书籍分类信息 '''
+    """ 书籍分类信息 """
     __tablename__ = 'book_category'
     cate_id = db.Column(db.Integer, primary_key=True)  # 分类ID
     cate_name = db.Column(db.String(50))  # 分类名称
@@ -113,7 +118,8 @@ class BookCategory(db.Model):
 
 
 class BookVolume(db.Model):
-    ''' 书籍卷节信息 '''
+    """ 书籍卷节信息 """
+
     __tablename__ = 'book_volume'
     id = db.Column(db.Integer, primary_key=True)  # ID
     book_id = db.Column(db.Integer, index=True)  # 书籍ID
@@ -126,7 +132,7 @@ class BookVolume(db.Model):
 
 
 class BookChapters(db.Model):
-    ''' 书籍章节信息 '''
+    """ 书籍章节信息 """
     __table_args__ = {'mysql_engine': 'InnoDB', 'mysql_charset': 'utf8'}
 
     id = db.Column(db.Integer, primary_key=True)  # ID
@@ -151,7 +157,10 @@ class BookChapters(db.Model):
 
 
 class BookChapterContent(db.Model):
-    ''' 书籍章节内容信息 '''
+    """
+    书籍章节内容信息
+    """
+
     __tablename__ = 'book_chapter_content'
     id = db.Column(db.Integer, primary_key=True)  # ID
     book_id = db.Column(db.Integer)  # 书籍ID

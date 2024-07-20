@@ -25,13 +25,11 @@ def generate_jwt(payload, expire, secret_key=None):
 # 校验
 def verify_jwt(token, secret_key=None):
     if not secret_key:
-        secret_key = current_app.config[
-            'SECRET_KEY'
-        ]
+        secret_key = current_app.config.get('SECRET_KEY')
 
     try:
         payload = jwt.decode(token, secret_key, algorithms=['HS256'])
-
     except jwt.PyJWTError:
         payload = None
+        print(payload)
     return payload

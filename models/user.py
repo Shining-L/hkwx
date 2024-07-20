@@ -34,6 +34,7 @@ class User(UserMixin, db.Model):
         self.update_info(data)
 
     def update_info(self, data):
+        print(data)
         self.nickName = data['nickName']
         self.gender = data['gender']
         self.city = data['city']

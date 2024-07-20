@@ -1,5 +1,4 @@
 import secrets
-import string
 
 
 def generate_key(length=32):

@@ -14,4 +14,7 @@ def create_applet_app(config_name=None):
     from .user import user_bp
     app.register_blueprint(user_bp)
 
+    # 导入请求钩子，用户的权限校验
+    from utils.middlewares import before_request
+    app.before_request(before_request)
     return app
