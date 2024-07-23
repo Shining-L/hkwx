@@ -2,7 +2,7 @@ from config import config_dict
 from flask_migrate import Migrate
 from models import db
 from applet_app import create_applet_app
-
+import click
 """
 ● 在pycharm中新建hkwx_backend项目
 ● 在pycharm中选择创建的虚拟环境python解释器

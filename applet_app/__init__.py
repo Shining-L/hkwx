@@ -12,7 +12,10 @@ def create_applet_app(config_name=None):
 
     # 注册蓝图对象
     from .user import user_bp
+    from .mybooks import my_books_bp
+
     app.register_blueprint(user_bp)
+    app.register_blueprint(my_books_bp)
 
     # 导入请求钩子，用户的权限校验
     from utils.middlewares import before_request

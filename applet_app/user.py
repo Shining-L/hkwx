@@ -103,7 +103,6 @@ def add_user():
 # 在请求视图之前就执行，检查是否有user_id
 
 @user_bp.route('/get_user')
-@login_required
 def get_userinfo():
     """
     1.默认的请求格式是get
