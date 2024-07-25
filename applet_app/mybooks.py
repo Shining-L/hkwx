@@ -4,7 +4,7 @@
 from flask import Blueprint, g, current_app, jsonify
 from utils.decoraters import login_required
 # 书架表\书籍表\用户表
-from models import BookShelf, db, Book, User
+from models import BookShelf, db, Book, User, BookChapters, ReadRate
 # 导入随机模块
 import random
 
@@ -112,6 +112,7 @@ def add_book(book_id):
         # 6.如果存在，则直接返回消息
         return jsonify(msg="书架中该书籍已存在")
 
+
 # 定义路由，书籍管理--删除书籍
 @my_books_bp.route('/<book_id>', methods=['DELETE'])
 @login_required
@@ -127,3 +128,62 @@ def delete_book(book_id):
     db.session.delete(book_shelf)
     db.session.commit()
     return jsonify(msg="删除成功")
+
+
+# 最后阅读
+
+@my_books_bp.route('/last')
+@login_required
+def book_last_reading():
+    # 1.使用登陆装饰器，获取用户信息
+    user_id = g.user_id
+    user = User.query.get(user_id)
+    # 记录最后阅读的内容
+    read_rate = None
+
+    # 2.判断用户是否有阅读记录
+    if not user.last_read:
+        # 3.如果用户没有阅读，默认查询第一本书籍，当作用户的阅读书籍
+        # 查询书架的第一本书
+        book = Book.query.first()
+        # 保存用户的阅读书籍的id
+        user.last_read = book.book_id
+        # 查询书籍的章节信息，默认是升序 1
+
+        bk_chapter = BookChapters.query.filter_by(book_id=book.book_id).order_by(BookChapters.chapter_id.asc()).first()
+        # 保存到用户的阅读书籍的章节信息
+        user.last_read_chapter_id = bk_chapter.chapter_id
+        read_rate = ReadRate(
+            user_id=user.id,
+            book_id=book.book_id,
+            chapter_id=bk_chapter.chapter_id,
+            chapter_name=bk_chapter.chapter_name
+        )
+        db.session.add(read_rate)
+        # 保存到用户表
+        db.session.add(user)
+        # 可以同时保存两张表
+        # db.session.add_all([read_rate, user])
+
+        db.session.commit()
+
+    else:
+        # 4.如果用户有阅读记录，查询用户阅读的书籍
+        book = Book.query.get(user.last_read)
+
+    if not read_rate:
+        read_rate = ReadRate.query.filter_by(
+            user_id=user.id,
+            book_id=book.book_id,
+            chapter_id=user.last_read_chapter_id
+        ).first()
+
+    data = {
+        'id': book.book_id,
+        'title': book.book_name,
+        'chapter': read_rate.chapter_name,
+        'progress': read_rate.rate,
+        'imgUrl': f"http://{current_app.config['QINIU_SETTINGS']['host']}/{book.cover}"
+    }
+
+    return jsonify(data)
