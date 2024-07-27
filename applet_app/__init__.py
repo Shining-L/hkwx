@@ -14,10 +14,13 @@ def create_applet_app(config_name=None):
     from .user import user_bp
     from .mybooks import my_books_bp
     from .category import category_bp
+    from .search import search_bp
 
     app.register_blueprint(user_bp)
     app.register_blueprint(my_books_bp)
     app.register_blueprint(category_bp)
+    app.register_blueprint(search_bp)
+
     # 导入请求钩子，用户的权限校验
     from utils.middlewares import before_request
     app.before_request(before_request)

@@ -102,6 +102,7 @@ def category_book_list():
     # 遍历分页数据，获取每页数据、总页数
     for item in books_list:
         # category_name = next((category.cate_name for category in categories if category.cate_id == item.cate_id), None)
+
         items.append({
             'id': item.book_id,
             'title': item.book_name,
