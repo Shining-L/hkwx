@@ -15,11 +15,15 @@ def create_applet_app(config_name=None):
     from .mybooks import my_books_bp
     from .category import category_bp
     from .search import search_bp
+    from .book import book_bp
+    from .recommend import re_bp
 
     app.register_blueprint(user_bp)
     app.register_blueprint(my_books_bp)
     app.register_blueprint(category_bp)
     app.register_blueprint(search_bp)
+    app.register_blueprint(book_bp)
+    app.register_blueprint(re_bp)
 
     # 导入请求钩子，用户的权限校验
     from utils.middlewares import before_request
