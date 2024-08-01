@@ -12,5 +12,7 @@ class BrowseHistory(db.Model):
     book_id = db.Column(db.Integer, db.ForeignKey('book.book_id'))
 
     book = db.relationship('Book', uselist=False)
+    # 第一次保存数据的时候实现一次
     created = db.Column(db.DateTime(), server_default=func.now())
+    # fun.now()用于获取当前的日期和时间 更新每一次修改都要保存时间
     updated = db.Column(db.DateTime(), server_default=func.now())

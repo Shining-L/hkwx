@@ -7,7 +7,7 @@ def login_required(fun):
     @functools.wraps(fun)  # 让被装饰器的装饰的函数的属性(函数名)不会发生变化
     def wrapper(*args, **kwargs):
         if not g.user_id:
-            return jsonify(msg="token异常"), 401
+            return jsonify(msg="用户未登录，请重新登陆"), 401
         return fun(*args, **kwargs)
 
     return wrapper

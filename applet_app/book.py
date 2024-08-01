@@ -138,7 +138,7 @@ def reader_book(book_id):
     progress = None
     if g.user_id:
         progress = ReadRate.query.filter_by(book_id=book_id,chapter_id=chapter_id,user_id=g.user_id).first()
-        
+
 
     data = {
         'id':book_id,

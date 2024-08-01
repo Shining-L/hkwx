@@ -21,7 +21,7 @@ class User(UserMixin, db.Model):
     brightness = db.Column(db.Integer(), server_default='30')  # 10~100 亮度
     fontSize = db.Column(db.Integer(), server_default='14')  # 字号
     background = db.Column(db.String(10), default='B1')  # B1 ~ B6 内置背景
-    turn = db.Column(db.String(10), default='T1')  # T1 仿真 T2 平滑 T3 无 翻页模式
+    turn = db.Column(db.String(10), default='T1')  # T1 仿真 T2 平滑 T3 无 `翻页模式`
 
     last_read = db.Column(db.Integer())  # 最后阅读一本书
     last_read_chapter_id = db.Column(db.Integer())  # 最后阅读一本书的章节id

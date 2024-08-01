@@ -25,7 +25,6 @@ def hot_books(cate_id):
     if not o_books:
         o_books = Book.query.limit(4).all()
 
-
     # 保存实际的基本信息
     for item in o_books:
         books.append({

@@ -17,6 +17,8 @@ def create_applet_app(config_name=None):
     from .search import search_bp
     from .book import book_bp
     from .recommend import re_bp
+    from .my import my_bp
+    from .reader_config import config_bp
 
     app.register_blueprint(user_bp)
     app.register_blueprint(my_books_bp)
@@ -24,6 +26,8 @@ def create_applet_app(config_name=None):
     app.register_blueprint(search_bp)
     app.register_blueprint(book_bp)
     app.register_blueprint(re_bp)
+    app.register_blueprint(my_bp)
+    app.register_blueprint(config_bp)
 
     # 导入请求钩子，用户的权限校验
     from utils.middlewares import before_request
